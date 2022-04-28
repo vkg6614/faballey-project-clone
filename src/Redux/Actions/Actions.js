@@ -6,6 +6,9 @@ import {
   GET_CATEGORY_LOADING,
   GET_CATEGORY_SUCCESS,
   GET_CATEGORY_FAIL,
+  GET_CART_DETAILS_LOADING,
+  GET_CART_DETAILS_SUCCESS,
+  GET_CART_DETAILS_FAIL,
 } from "../ActionTypes/ActionTypes";
 
 const getProductsAction = () => async (dispatch) => {
@@ -28,4 +31,14 @@ const getCategoriesAction = () => async (dispatch) => {
   }
 };
 
-export { getProductsAction, getCategoriesAction };
+const getCartDetailsAction = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_CART_DETAILS_LOADING });
+    let { data } = await axios.get("http://localhost:4000/cartsData");
+    dispatch({ type: GET_CART_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: GET_CART_DETAILS_FAIL, payload: error });
+  }
+};
+
+export { getProductsAction, getCategoriesAction, getCartDetailsAction };

@@ -1,5 +1,5 @@
 .cartDetails-main-container {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 100vh;
   margin-top: 100px;
 }
@@ -10,7 +10,7 @@
   /* width: 60%; */
   justify-content: space-around;
   margin: 0 auto;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 
 .single-pro {
@@ -18,28 +18,87 @@
   border: 1px solid black;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  margin: 20px 0px;
+  font-size: 0.8rem;
+  /* justify-content: space-between; */
 }
 .small-details {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
+  margin-top: 12px;
 }
 .add-del-div {
   display: flex;
+  border-top: 1px solid grey;
+  padding-top: 10px;
 }
 .cartDetails-secondary-container .price {
-  border: 1px solid black;
-  padding-bottom: 50px;
+  border-bottom: 1px solid grey;
+  padding-bottom: 65px;
 }
 
 .cartDetails-left-container {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   /* height: 20px; */
   width: 50%;
 }
 
 .cartDetails-right-container {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   height: 20px;
-  width: 40%;
+  width: 35%;
+}
+
+.middle-div {
+  width: 60%;
+  margin-left: 10px;
+}
+.delete-icon {
+  margin-top: 10px;
+}
+
+.bottom-div {
+  border: 1px solid grey;
+  font-size: 0.8rem;
+}
+
+.cartDetails-right-container .top-div {
+  padding: 20px 1em;
+  background-color: rgb(244, 244, 244);
+  margin: 20px auto;
+}
+
+.apply-coupon,
+.sub-total {
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  padding: 10px 0;
+  text-align: center;
+}
+.apply-coupon {
+  margin-top: 10px;
+}
+.redeem-gift {
+  padding: 10px 0;
+  text-align: center;
+}
+.sub-total {
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: 10px; */
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.place-order-button {
+  background-color: rgb(252, 100, 134);
+  color: white;
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 10px 0px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px auto;
 }

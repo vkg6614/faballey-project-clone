@@ -5,6 +5,9 @@ import {
   GET_CATEGORY_LOADING,
   GET_CATEGORY_SUCCESS,
   GET_CATEGORY_FAIL,
+  GET_CART_DETAILS_LOADING,
+  GET_CART_DETAILS_SUCCESS,
+  GET_CART_DETAILS_FAIL,
 } from "../ActionTypes/ActionTypes";
 
 const getProductsReducer = (state = { productsData: [] }, action) => {
@@ -35,4 +38,18 @@ const getCategoriesReducer = (state = { categoriesData: [] }, action) => {
   }
 };
 
-export { getProductsReducer, getCategoriesReducer };
+const getCartDetailsReducer = (state = { cartData: [] }, action) => {
+  switch (action.type) {
+    case GET_CART_DETAILS_LOADING:
+      return { loading: true, cartData: [] };
+    case GET_CART_DETAILS_SUCCESS:
+      return { loading: false, cartData: action.payload };
+    case GET_CART_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export { getProductsReducer, getCategoriesReducer, getCartDetailsReducer };
