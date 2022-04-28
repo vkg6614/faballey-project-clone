@@ -1,0 +1,12 @@
+.details-div {
+  display: flex;
+}
+.details-div button {
+  border-bottom: 3px solid pink;
+  margin-right: 1em;
+}
+
+.details-div button:hover {
+  color: pink;
+  border-bottom: black;
+}
