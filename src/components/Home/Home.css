@@ -1,0 +1,29 @@
+.carousel-div {
+  display: flex;
+  position: relative;
+  border: 1px solid black;
+}
+.carousel-div img {
+  width: 100%;
+}
+
+.carousel-div .left-arrow,
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  border: 2px solid grey;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+}
+
+.carousel-div .left-arrow {
+  left: 10px;
+}
+.carousel-div .right-arrow {
+  right: 10px;
+}

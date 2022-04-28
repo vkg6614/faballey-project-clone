@@ -1,0 +1,51 @@
+.img-divs {
+  border: 1px solid black;
+}
+.img-divs img {
+  width: 48%;
+}
+
+.size {
+  display: flex;
+  flex-wrap: wrap;
+  /* border: 1px solid black; */
+  width: 85%;
+
+  margin-bottom: 10px;
+}
+.size p {
+  margin-right: 1em;
+  margin-bottom: 10px;
+  border: 1px solid grey;
+  padding: 18px 0.8em;
+  font-weight: bold;
+}
+.size p:hover {
+  color: white;
+  background-color: black;
+}
+
+.cartBtns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addToCart {
+  color: white;
+
+  background-color: rgb(252, 100, 134);
+  padding: 12px 7em;
+}
+.addToWishlist {
+  display: flex;
+  align-items: center;
+  border: 1px solid grey;
+  padding: 10px 3em;
+}
+
+.addToWishlist,
+.addToCart {
+  font-size: 0.7rem;
+  font-weight: bold;
+  cursor: pointer;
+}

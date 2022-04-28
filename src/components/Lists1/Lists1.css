@@ -1,0 +1,12 @@
+.lists1-container {
+  text-align: center;
+}
+.lists1-img-div {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  padding: 0 1em;
+}
+.lists1-img-div img {
+  width: 32%;
+}
