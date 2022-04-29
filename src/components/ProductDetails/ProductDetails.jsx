@@ -37,7 +37,7 @@ const ProductDetails = () => {
       hoverImages,
     } = proData[0];
 
-    axios.post("https://faballey-jsonserver-reactjs.herokuapp.com/cartsData", {
+    axios.post("http://localhost:4000/cartsData", {
       title,
       color: prodSize,
       categoryId,

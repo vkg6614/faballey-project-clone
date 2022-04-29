@@ -14,9 +14,7 @@ import {
 const getProductsAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_PRODUCTS_LOADING });
-    let { data } = await axios.get(
-      "https://faballey-jsonserver-reactjs.herokuapp.com/products"
-    );
+    let { data } = await axios.get("http://localhost:4000/products");
     dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: GET_PRODUCTS_FAIL, payload: error });
@@ -26,9 +24,7 @@ const getProductsAction = () => async (dispatch) => {
 const getCategoriesAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_CATEGORY_LOADING });
-    let { data } = await axios.get(
-      "https://faballey-jsonserver-reactjs.herokuapp.com/categories"
-    );
+    let { data } = await axios.get("http://localhost:4000/categories");
     dispatch({ type: GET_CATEGORY_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: GET_CATEGORY_FAIL, payload: error });
@@ -38,9 +34,7 @@ const getCategoriesAction = () => async (dispatch) => {
 const getCartDetailsAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_CART_DETAILS_LOADING });
-    let { data } = await axios.get(
-      "https://faballey-jsonserver-reactjs.herokuapp.com/cartsData"
-    );
+    let { data } = await axios.get("http://localhost:4000/cartsData");
     dispatch({ type: GET_CART_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: GET_CART_DETAILS_FAIL, payload: error });

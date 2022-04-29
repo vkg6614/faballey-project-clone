@@ -49,7 +49,7 @@ const ResponsiveAppBar = () => {
       <Container
         maxWidth="xl"
         style={{
-          backgroundColor: "grey",
+          backgroundColor: "rgb(244,244,244)",
           padding: "0px",
         }}
       >
