@@ -1,17 +1,23 @@
-import { Delete } from "@mui/icons-material";
 import React, { useEffect } from "react";
 import ResponsiveAppBar from "../CartNavbar/CartNavbar";
 import "./CartDetails.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartDetailsAction } from "../../Redux/Actions/Actions";
+import { useNavigate } from "react-router-dom";
 
 const CartDetails = () => {
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getCartDetailsAction());
   }, [dispatch]);
+
+  const onClickHandleForCartPlaceOrderBtn = () => {
+    navigate("/Shipping");
+  };
+
   return (
     <div>
       <ResponsiveAppBar />
@@ -34,8 +40,8 @@ const CartDetails = () => {
                     <div className="middle-div">
                       <p style={{ fontSize: "1rem" }}>{cart.description}</p>
                       <div className="small-details">
-                        <p>{cart.color}</p>
-                        <p>1</p>
+                        <p>size: {cart.color}</p>
+                        <p>qty: 1</p>
                         <p>Color: red</p>
                       </div>
                       <div
@@ -88,7 +94,12 @@ const CartDetails = () => {
                   <p>Total</p>
                   <p>Rs 1310</p>
                 </div>
-                <button className="place-order-button">Place Order</button>
+                <button
+                  onClick={() => onClickHandleForCartPlaceOrderBtn()}
+                  className="place-order-button"
+                >
+                  Place Order
+                </button>
               </div>
 
               <div className="bottom-div">

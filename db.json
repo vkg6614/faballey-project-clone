@@ -11780,19 +11780,6 @@
   "cartsData": [
     {
       "title": "BODYCON DRESSES",
-      "color": "M",
-      "categoryId": 5,
-      "description": "CURVE Black Floral Flared Sleeve Blouse",
-      "shopBy": "style",
-      "price": 1120,
-      "discPrice": 50,
-      "sizes": "XL,L,S,M,LX",
-      "images": "https://img.faballey.com/images/Product/SKT00760Z/1.jpg",
-      "hoverImages": "https://img.faballey.com/images/Product/SKT00760Z/2.jpg",
-      "id": 2
-    },
-    {
-      "title": "BODYCON DRESSES",
       "color": "XL",
       "categoryId": 5,
       "description": "CURVE Black Floral Flared Sleeve Blouse",
@@ -11806,7 +11793,7 @@
     },
     {
       "title": "BLOUSES",
-      "color": "L",
+      "color": "S",
       "categoryId": 4,
       "description": "CURVE Black Floral Flared Sleeve Blouse",
       "shopBy": "style",
@@ -11816,58 +11803,6 @@
       "images": "https://img.faballey.com/images/Product/SKT00760Z/1.jpg",
       "hoverImages": "https://img.faballey.com/images/Product/SKT00760Z/2.jpg",
       "id": 4
-    },
-    {
-      "title": "BLOUSES",
-      "color": "M",
-      "categoryId": 4,
-      "description": "CURVE Black Floral Flared Sleeve Blouse",
-      "shopBy": "style",
-      "price": 1120,
-      "discPrice": 50,
-      "sizes": "XL,L,S,M,LX",
-      "images": "https://img.faballey.com/images/Product/SKT00760Z/1.jpg",
-      "hoverImages": "https://img.faballey.com/images/Product/SKT00760Z/2.jpg",
-      "id": 5
-    },
-    {
-      "title": "Tank Tops",
-      "color": "3XL",
-      "categoryId": 4,
-      "description": "CURVE Black Floral Flared Sleeve Blouse",
-      "shopBy": "style",
-      "price": 1120,
-      "discPrice": 50,
-      "sizes": "XL,L,S,M,LX",
-      "images": "https://img.faballey.com/images/Product/TOP05251Z/1.jpg",
-      "hoverImages": "https://img.faballey.com/images/Product/TOP05251Z/2.jpg",
-      "id": 6
-    },
-    {
-      "title": "PEPLUM TOPS",
-      "color": "3XL",
-      "categoryId": 4,
-      "description": "CURVE Black Floral Flared Sleeve Blouse",
-      "shopBy": "style",
-      "price": 1120,
-      "discPrice": 50,
-      "sizes": "XL,L,S,M,LX",
-      "images": "https://img.faballey.com/images/Product/SKT00760Z/1.jpg",
-      "hoverImages": "https://img.faballey.com/images/Product/SKT00760Z/2.jpg",
-      "id": 7
-    },
-    {
-      "title": "SHIRTS",
-      "color": "XS",
-      "categoryId": 4,
-      "description": "CURVE Black Floral Flared Sleeve Blouse",
-      "shopBy": "style",
-      "price": 1120,
-      "discPrice": 50,
-      "sizes": "XL,L,S,M,LX",
-      "images": "https://img.faballey.com/images/Product/SKT00760Z/1.jpg",
-      "hoverImages": "https://img.faballey.com/images/Product/SKT00760Z/2.jpg",
-      "id": 8
     }
   ]
 }

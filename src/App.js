@@ -1,4 +1,5 @@
 import {
+  getCartDetailsAction,
   getCategoriesAction,
   getProductsAction,
 } from "./Redux/Actions/Actions";
@@ -10,6 +11,8 @@ import Home from "./components/Home/Home";
 import Lists from "./components/Lists/Lists";
 import CartDetails from "./components/CartDetails/CartDetails";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import Shipping from "./components/ShippingPage/Shipping";
+import Payment from "./components/PaymentPage/Payment";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +21,7 @@ function App() {
   useEffect(() => {
     dispatch(getProductsAction());
     dispatch(getCategoriesAction());
+    dispatch(getCartDetailsAction());
   }, [dispatch]);
   const getValueFromHome = (data) => {
     setType(data);
@@ -34,7 +38,11 @@ function App() {
             element={<Home getValueFromHome={getValueFromHome} />}
           />
           <Route exact path="/lists" element={<Lists type={type} />} />
-          <Route exact path="/cartDetails" element={<CartDetails />} />
+          <Route exact path="/Bag" element={<CartDetails />} />
+
+          {/* <Route exact path="/bag" element={<CartDetails />} /> */}
+          <Route exact path="/Shipping" element={<Shipping />} />
+          <Route exact path="/Payment" element={<Payment />} />
           <Route exact path="/:id" element={<ProductDetails />} />
         </Routes>
       </BrowserRouter>

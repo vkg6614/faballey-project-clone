@@ -10,7 +10,6 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [proData, setProData] = useState();
   const [prodSize, setProdSize] = useState("");
-  console.log(prodSize);
   const { productsData } = useSelector((state) => state.getProductsReducer);
   useState(() => {
     getSingleProduct();

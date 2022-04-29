@@ -48,3 +48,5 @@ const getCartDetailsAction = () => async (dispatch) => {
 };
 
 export { getProductsAction, getCategoriesAction, getCartDetailsAction };
+
+// "https://faballey-jsonserver-reactjs.herokuapp.com/products";

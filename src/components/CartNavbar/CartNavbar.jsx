@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import PaymentIcon from "@mui/icons-material/Payment";
+import { NavLink } from "react-router-dom";
 
 // const pages = ["Products", "Pricing", "Blog"];
 const pages = [
@@ -67,10 +68,18 @@ const ResponsiveAppBar = () => {
 
           <Box className="details-div">
             {pages.map((page) => (
-              <Button key={page.id} sx={{ color: "white", display: "block" }}>
+              <NavLink
+                className="detail-btn"
+                to={`/${page.text}`}
+                key={page.id}
+                style={({ isActive }) => ({
+                  color: isActive ? "pink" : "black",
+                  borderBottom: isActive ? "2px solid pink" : "black",
+                })}
+              >
                 {page.icon}
                 <p>{page.text}</p>
-              </Button>
+              </NavLink>
             ))}
           </Box>
 

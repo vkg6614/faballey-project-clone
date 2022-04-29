@@ -1,12 +1,13 @@
 .details-div {
   display: flex;
 }
-.details-div button {
-  border-bottom: 3px solid pink;
-  margin-right: 1em;
+.details-div .detail-btn {
+  margin-left: 1em;
+  text-decoration: none;
+  padding-bottom: 10px;
 }
+/* .details-div .detail-btn  */
 
-.details-div button:hover {
+/* .details-div Navlink:hover {
   color: pink;
-  border-bottom: black;
-}
+} */

@@ -1,13 +1,36 @@
-import React from "react";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import React, { useEffect, useState } from "react";
+// import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import "./Navbar.css";
 import { NavLink, useLocation } from "react-router-dom";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useSelector } from "react-redux";
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
+  },
+}));
 
 const Navbar = () => {
+  const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+  const [cartLength, setCartLength] = useState("");
+  useEffect(() => {
+    setCartLength(cartData);
+  }, [cartLength, cartData]);
   const location = useLocation();
-  if (location.pathname === "/cartDetails") {
+  if (
+    location.pathname === "/cartDetails" ||
+    location.pathname === "/Bag" ||
+    location.pathname === "/Shipping" ||
+    location.pathname === "/Payment"
+  ) {
     return null;
   }
   return (
@@ -48,8 +71,15 @@ const Navbar = () => {
               <Button className="signup">Sign up</Button>
             </Grid>
             <Grid item>
-              <NavLink to="/cartDetails">
-                <AddShoppingCartIcon className="AddToCartBtn" />
+              <NavLink to="/Bag">
+                <IconButton className="AddToCartBtn" aria-label="cart">
+                  <StyledBadge
+                    badgeContent={cartLength.length}
+                    color="secondary"
+                  >
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                </IconButton>
               </NavLink>
             </Grid>
           </Grid>

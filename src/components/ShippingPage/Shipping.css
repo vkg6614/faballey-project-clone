@@ -1,0 +1,27 @@
+.shipping-div {
+  border: 1px solid black;
+  margin-top: 20px;
+  padding: 20px 0.4em 20px 1em;
+}
+.shipping-div .box {
+  display: grid;
+  grid-template-columns: auto auto;
+  /* place-items: center; */
+}
+.shipping-div .formControl {
+  width: 96%;
+  /* border: 1px solid black; */
+}
+.formControl input {
+  border: none;
+  margin-top: -12px;
+  border: 1px solid grey;
+}
+.shipping-div button {
+  padding: 10px 4em;
+  margin-top: 20px;
+  background-color: rgb(252, 100, 134);
+  color: white;
+  font-weight: normal;
+  text-transform: capitalize;
+}
