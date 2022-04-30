@@ -1,0 +1,49 @@
+.main-signup-div {
+  position: fixed;
+  display: none;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  width: 35%;
+  transform: translate(-50%, -50%);
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.main-signup-div > p {
+  text-align: right;
+  padding: 10px;
+  /* border: 1px solid black; */
+  /* width: fit-content; */
+}
+.main-signup-div > p > span {
+  border: 1px solid black;
+  padding: 0 5px;
+  border-radius: 50%;
+}
+.signup-div {
+  padding: 30px 3em;
+}
+.signup-div .img-div {
+  text-align: center;
+  padding: 20px 0;
+  /* border: 1px solid black; */
+}
+.signup-div .img-div img {
+  width: 35%;
+  margin: 25px 0;
+}
+.signup-div button {
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  background-color: rgb(252, 100, 134);
+  font-weight: bold;
+  margin-top: 40px;
+  border: none;
+}
+.signup-div input {
+  width: 100%;
+  padding: 15px 1em;
+  margin-top: 10px;
+}

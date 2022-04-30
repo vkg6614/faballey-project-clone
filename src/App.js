@@ -13,10 +13,12 @@ import CartDetails from "./components/CartDetails/CartDetails";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Shipping from "./components/ShippingPage/Shipping";
 import Payment from "./components/PaymentPage/Payment";
+import Signup from "./components/Sign/Log/Signup";
 
 function App() {
   const dispatch = useDispatch();
   const [type, setType] = useState("");
+  const [signup_state, setSignup_state] = useState({ state: "none" });
 
   useEffect(() => {
     dispatch(getProductsAction());
@@ -27,10 +29,16 @@ function App() {
     setType(data);
   };
 
+  const getSignupStateFromSignup = (data) => {
+    setSignup_state(data);
+  };
+  console.log(signup_state);
+
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <Navbar getSignupStateFromSignup={getSignupStateFromSignup} />
+        <Signup style={{ display: `${signup_state.state}` }} />
         <Routes>
           <Route
             exact

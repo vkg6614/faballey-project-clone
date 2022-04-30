@@ -18,12 +18,14 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({ getSignupStateFromSignup }) => {
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
   const [cartLength, setCartLength] = useState("");
+  const [handleSignup, setHandleSignp] = useState({ dispaly: "none" });
   useEffect(() => {
     setCartLength(cartData);
-  }, [cartLength, cartData]);
+    getSignupStateFromSignup(handleSignup);
+  }, [cartLength, cartData, handleSignup, getSignupStateFromSignup]);
   const location = useLocation();
   if (
     location.pathname === "/cartDetails" ||
@@ -65,10 +67,17 @@ const Navbar = () => {
               <Button>Gift Cards</Button>
             </Grid>
             <Grid item>
-              <Button>Login</Button>
+              <Button onClick={() => setHandleSignp({ dispaly: "block" })}>
+                Login
+              </Button>
             </Grid>
             <Grid item>
-              <Button className="signup">Sign up</Button>
+              <Button
+                onClick={() => setHandleSignp({ dispaly: "block" })}
+                className="signup"
+              >
+                Sign up
+              </Button>
             </Grid>
             <Grid item>
               <NavLink to="/Bag">
