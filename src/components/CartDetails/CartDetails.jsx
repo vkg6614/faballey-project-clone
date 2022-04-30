@@ -1,21 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ResponsiveAppBar from "../CartNavbar/CartNavbar";
 import "./CartDetails.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartDetailsAction } from "../../Redux/Actions/Actions";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CartDetails = () => {
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getCartDetailsAction());
   }, [dispatch]);
 
   const onClickHandleForCartPlaceOrderBtn = () => {
     navigate("/Shipping");
+  };
+
+  const deleteProductClickHandle = async (id) => {
+    await axios.delete(
+      `https://faballey-jsonserver-reactjs.herokuapp.com/cartsData/${id}`
+    );
+    dispatch(getCartDetailsAction());
   };
 
   return (
@@ -59,7 +69,10 @@ const CartDetails = () => {
                     </div>
                     <div>
                       <p className="price">Price: {cart.price}</p>
-                      <DeleteIcon className="delete-icon" />
+                      <DeleteIcon
+                        onClick={() => deleteProductClickHandle(cart.id)}
+                        className="delete-icon"
+                      />
                     </div>
                   </div>
                 ))}

@@ -18,7 +18,7 @@ import Signup from "./components/Sign/Log/Signup";
 function App() {
   const dispatch = useDispatch();
   const [type, setType] = useState("");
-  const [signup_state, setSignup_state] = useState({ state: "none" });
+  const [signup_state, setSignup_state] = useState(false);
 
   useEffect(() => {
     dispatch(getProductsAction());
@@ -32,13 +32,14 @@ function App() {
   const getSignupStateFromSignup = (data) => {
     setSignup_state(data);
   };
-  console.log(signup_state);
+  // console.log(signup_state);
 
   return (
     <>
+      <Signup signup_state={signup_state} />
       <BrowserRouter>
         <Navbar getSignupStateFromSignup={getSignupStateFromSignup} />
-        <Signup style={{ display: `${signup_state.state}` }} />
+
         <Routes>
           <Route
             exact

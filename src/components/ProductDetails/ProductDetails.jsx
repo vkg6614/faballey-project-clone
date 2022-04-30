@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./ProductDetails.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import axios from "axios";
 import "./ProductDetails.css";
+import { getCartDetailsAction } from "../../Redux/Actions/Actions";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [proData, setProData] = useState();
   const [prodSize, setProdSize] = useState("");
   const { productsData } = useSelector((state) => state.getProductsReducer);
+  const dispatch = useDispatch();
+
   useState(() => {
     getSingleProduct();
   }, [proData]);
@@ -49,6 +52,9 @@ const ProductDetails = () => {
       images,
       hoverImages,
     });
+    setTimeout(() => {
+      dispatch(getCartDetailsAction());
+    }, 200);
   };
 
   return (

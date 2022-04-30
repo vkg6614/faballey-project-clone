@@ -1,11 +1,18 @@
 import React from "react";
 import "./Signup.css";
+import { useState } from "react";
 
-const Signup = () => {
+const Signup = ({ signup_state }) => {
+  const [crossClick, setCrossClick] = useState(true);
+  console.log(crossClick, "cro", signup_state, "si");
+
   return (
-    <div className="main-signup-div">
+    <div
+      style={{ display: signup_state && crossClick ? "block" : "none" }}
+      className="main-signup-div"
+    >
       <p>
-        <span>X</span>
+        <span onClick={() => setCrossClick(false)}>X</span>
       </p>
       <div className="signup-div">
         <h2 style={{ marginBottom: "30px" }}>LOGIN OR SIGNUP</h2>
