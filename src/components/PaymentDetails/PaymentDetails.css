@@ -29,23 +29,6 @@
   display: none;
 } */
 
-.cashOnDelivery {
-  display: none;
-  /* padding-bottom: 20px; */
-}
-.upi {
-  display: none;
-  /* padding-bottom: 20px; */
-}
-.net-banking {
-  display: none;
-}
-.mobile-wallets {
-  display: none;
-}
-.creditCard-debitCard {
-  /* display: none; */
-}
 .creditCard-debitCard > input {
   width: 100%;
   display: block;

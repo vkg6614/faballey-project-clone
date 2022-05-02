@@ -9,6 +9,7 @@ import axios from "axios";
 
 const CartDetails = () => {
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+  // console.log(cartData, "car");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +18,19 @@ const CartDetails = () => {
     dispatch(getCartDetailsAction());
   }, [dispatch]);
 
+  useEffect(() => {
+    getPriceFromCart();
+  }, [priceOfCart]);
+  var [priceOfCart, setPriceOfcart] = useState(null);
+
+  const getPriceFromCart = () => {
+    let price = cartData.map((data) => {
+      return data.price;
+    });
+    let sum = price.reduce((acc, curr) => (acc += curr), 0);
+    setPriceOfcart(sum);
+  };
+  // console.log(priceOfCart, "p");
   const onClickHandleForCartPlaceOrderBtn = () => {
     navigate("/Shipping");
   };
@@ -34,7 +48,7 @@ const CartDetails = () => {
       <div className="cartDetails-main-container">
         <div className="cartDetails-secondary-container">
           <div className="cartDetails-left-container">
-            <h3>My Shopping Bag(3)</h3>
+            <h3>My Shopping Bag({cartData.length})</h3>
             <div>
               {cartData &&
                 cartData.map((cart) => (
@@ -50,9 +64,9 @@ const CartDetails = () => {
                     <div className="middle-div">
                       <p style={{ fontSize: "1rem" }}>{cart.description}</p>
                       <div className="small-details">
-                        <p>size: {cart.color}</p>
+                        <p>size: {cart.size}</p>
                         <p>qty: 1</p>
-                        <p>Color: red</p>
+                        <p>Color: {cart.color}</p>
                       </div>
                       <div
                         style={{
@@ -101,11 +115,11 @@ const CartDetails = () => {
                 </div>
                 <div className="sub-total">
                   <p>Sub Total</p>
-                  <p>Rs 1310</p>
+                  <p>Rs {priceOfCart}</p>
                 </div>
                 <div className="total">
                   <p>Total</p>
-                  <p>Rs 1310</p>
+                  <p>Rs {priceOfCart}</p>
                 </div>
                 <button
                   onClick={() => onClickHandleForCartPlaceOrderBtn()}

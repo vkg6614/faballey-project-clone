@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ResponsiveAppBar from "../CartNavbar/CartNavbar";
 import "./Shipping.css";
 import Box from "@mui/material/Box";
@@ -7,18 +7,72 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Shipping = () => {
-  //   const [name, setName] = React.useState("");
+  const [checkFields, setCheckFields] = useState(false);
+
+  const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+  // console.log(cartData, "car");
+  var [priceOfCart, setPriceOfcart] = useState(null);
+
+  const [formValue, setFormValue] = React.useState({
+    name: "",
+    mobile: "",
+    area: "",
+    country: "",
+    pincode: "",
+    city: "",
+    state: "",
+    checked: "",
+  });
   const navigate = useNavigate();
-  //   const handleChange = (event) => {
-  //     setName(event.target.value);
-  //   };
+
+  const onChangeFormHanle = (e) => {
+    let checkedValue = e.target.checked;
+    let value = e.target.value;
+    let name = e.target.name;
+    setFormValue({ ...formValue, [name]: value, checked: checkedValue });
+  };
+  // console.log(formValue);
 
   const shippingBtnOnClickHandle = () => {
-    // console.log("ha");
-    navigate("/Payment");
+    if (
+      formValue.name !== "" &&
+      formValue.mobile !== "" &&
+      formValue.area !== "" &&
+      formValue.country !== "" &&
+      formValue.pincode !== "" &&
+      formValue.city !== "" &&
+      formValue.state !== "" &&
+      formValue.checked !== false
+    ) {
+      setCheckFields(true);
+
+      axios.post(
+        "https://faballey-jsonserver-reactjs.herokuapp.com/userAddress",
+        formValue
+      );
+
+      navigate("/Payment");
+    } else {
+      setCheckFields(false);
+      alert("one of field is missing");
+    }
   };
+
+  const getPriceFromCart = () => {
+    let price = cartData.map((data) => {
+      return data.price;
+    });
+    let sum = price.reduce((acc, curr) => (acc += curr), 0);
+    setPriceOfcart(sum);
+  };
+
+  useEffect(() => {
+    getPriceFromCart();
+  }, []);
 
   return (
     <div>
@@ -31,9 +85,14 @@ const Shipping = () => {
               <Box className="box">
                 <FormControl className="formControl" variant="standard">
                   <label>Full name*</label>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    name="name"
+                    value={formValue.name}
+                    onChange={(e) => onChangeFormHanle(e)}
+                  />
                   <FormHelperText
-                    style={{ color: "red", marginBottom: "10px" }}
+                    style={{ color: checkFields ? "white" : "red" }}
                     id="component-helper-text"
                   >
                     This field is required
@@ -42,10 +101,15 @@ const Shipping = () => {
                 <FormControl className="formControl" variant="standard">
                   {/* <InputLabel htmlFor="component-helper">Name</InputLabel> */}
                   <label>Mobile number*</label>
-                  <Input type="phone" />
+                  <Input
+                    type="phone"
+                    name="mobile"
+                    value={formValue.mobile}
+                    onChange={(e) => onChangeFormHanle(e)}
+                  />
 
                   <FormHelperText
-                    style={{ color: "red", marginBottom: "10px" }}
+                    style={{ color: checkFields ? "white" : "red" }}
                     id="component-helper-text"
                   >
                     This field is required
@@ -55,9 +119,14 @@ const Shipping = () => {
                 <FormControl className="formControl" variant="standard">
                   {/* <InputLabel htmlFor="component-simple">Name</InputLabel> */}
                   <label>Country*</label>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    name="country"
+                    value={formValue.country}
+                    onChange={(e) => onChangeFormHanle(e)}
+                  />
                   <FormHelperText
-                    style={{ color: "red", marginBottom: "10px" }}
+                    style={{ color: checkFields ? "white" : "red" }}
                     id="component-helper-text"
                   >
                     This field is required
@@ -66,21 +135,26 @@ const Shipping = () => {
                 <FormControl className="formControl" variant="standard">
                   {/* <InputLabel htmlFor="component-helper">Name</InputLabel> */}
                   <label>PinCode*</label>
-                  <Input type="number" />
+                  <Input
+                    type="number"
+                    name="pincode"
+                    onChange={(e) => onChangeFormHanle(e)}
+                    value={formValue.pincode}
+                  />
 
                   <FormHelperText
-                    style={{ color: "red", marginBottom: "10px" }}
+                    style={{ color: checkFields ? "white" : "red" }}
                     id="component-helper-text"
                   >
                     This field is required
                   </FormHelperText>
                 </FormControl>
               </Box>
-              <label name="address" id="address">
-                Address*
-              </label>
+              <label name="address">Address*</label>
               <textarea
-                for="address"
+                name="area"
+                onChange={(e) => onChangeFormHanle(e)}
+                value={formValue.area}
                 style={{
                   width: "98%",
                   height: "100px",
@@ -90,9 +164,14 @@ const Shipping = () => {
               <Box className="box">
                 <FormControl className="formControl" variant="standard">
                   <label>City*</label>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    name="city"
+                    value={formValue.city}
+                    onChange={(e) => onChangeFormHanle(e)}
+                  />
                   <FormHelperText
-                    style={{ color: "red" }}
+                    style={{ color: checkFields ? "white" : "red" }}
                     id="component-helper-text"
                   >
                     This field is required
@@ -101,10 +180,15 @@ const Shipping = () => {
                 <FormControl className="formControl" variant="standard">
                   {/* <InputLabel htmlFor="component-helper">Name</InputLabel> */}
                   <label>State*</label>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    name="state"
+                    value={formValue.state}
+                    onChange={(e) => onChangeFormHanle(e)}
+                  />
 
                   <FormHelperText
-                    style={{ color: "red" }}
+                    style={{ color: checkFields ? "white" : "red" }}
                     id="component-helper-text"
                   >
                     This field is required
@@ -112,8 +196,14 @@ const Shipping = () => {
                 </FormControl>
               </Box>
               <br />
-              <input type="checkbox" name="checkAdd" id="checkAdd" />
-              <label for="checkAdd">Make this my default address</label>
+              <input
+                type="checkbox"
+                id="checkAdd"
+                name="checked"
+                value={formValue.checked}
+                onChange={(e) => onChangeFormHanle(e)}
+              />
+              <label htmfor="checkAdd">Make this my default address</label>
               <br />
 
               <Button
@@ -144,11 +234,11 @@ const Shipping = () => {
                 <h3 style={{ margin: "20px 0px" }}>Price Details</h3>
                 <div className="sub-total">
                   <p>Sub Total</p>
-                  <p>Rs 1310</p>
+                  <p>Rs {priceOfCart}</p>
                 </div>
                 <div className="total">
                   <p>Total</p>
-                  <p>Rs 1310</p>
+                  <p>Rs {priceOfCart}</p>
                 </div>
               </div>
 

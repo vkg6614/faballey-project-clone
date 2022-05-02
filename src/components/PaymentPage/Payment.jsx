@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import ResponsiveAppBar from "../CartNavbar/CartNavbar";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import "./Payment.css";
+import { useSelector } from "react-redux";
 
 const paymentMode = [
   "CREDIT/DEBIT CARD",
@@ -12,13 +13,24 @@ const paymentMode = [
   "CASH ON DELIVERY",
 ];
 const Payment = () => {
+  var [priceOfCart, setPriceOfcart] = useState(null);
   const [checkActiveState, setCheckActiveState] = useState({
     state: "CREDIT/DEBIT CARD",
   });
-  // useEffect(()=>{
-  //   setCheckActiveState({state:C})
-  // },[])
-  console.log(checkActiveState);
+  const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+
+  const getPriceFromCart = () => {
+    let price = cartData.map((data) => {
+      return data.price;
+    });
+    let sum = price.reduce((acc, curr) => (acc += curr), 0);
+    setPriceOfcart(sum);
+  };
+
+  useEffect(() => {
+    getPriceFromCart();
+  }, []);
+
   return (
     <div>
       <ResponsiveAppBar />
@@ -39,7 +51,7 @@ const Payment = () => {
             </div>
           </div>
           <div className="payment-details-div">
-            <PaymentDetails />
+            <PaymentDetails checkActiveState={checkActiveState} />
             <img
               style={{ marginTop: "30px" }}
               width="100%"
@@ -48,7 +60,7 @@ const Payment = () => {
             />
           </div>
           <div className="price-address-div">
-            <h3>1 Product(s) in bag</h3>
+            <h3>{cartData.length} Product(s) in bag</h3>
             <div
               style={{
                 backgroundColor: "rgb(244,244,244)",
@@ -64,7 +76,7 @@ const Payment = () => {
                 className="sub-total"
               >
                 <p>Sub Total</p>
-                <p>Rs 1310</p>
+                <p>Rs {priceOfCart}</p>
               </div>
               <div className="total">
                 <p>Shipping</p>
@@ -81,7 +93,7 @@ const Payment = () => {
                 className="total"
               >
                 <p>Total Payable</p>
-                <p>Rs 1310</p>
+                <p>Rs {priceOfCart}</p>
               </div>
             </div>
             <div

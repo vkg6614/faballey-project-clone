@@ -7,11 +7,18 @@ import axios from "axios";
 import "./ProductDetails.css";
 import { getCartDetailsAction } from "../../Redux/Actions/Actions";
 
+var productSizes = {
+  activeClass: "",
+  sizeArray: ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+};
+
 const ProductDetails = () => {
   const { id } = useParams();
   const [proData, setProData] = useState();
   const [prodSize, setProdSize] = useState("");
   const { productsData } = useSelector((state) => state.getProductsReducer);
+  const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+  const [checkActiveState, setCheckActiveState] = useState(productSizes);
   const dispatch = useDispatch();
 
   useState(() => {
@@ -32,6 +39,7 @@ const ProductDetails = () => {
       title,
       categoryId,
       description,
+      color,
       shopBy,
       price,
       discPrice,
@@ -40,21 +48,42 @@ const ProductDetails = () => {
       hoverImages,
     } = proData[0];
 
-    axios.post("https://faballey-jsonserver-reactjs.herokuapp.com/cartsData", {
-      title,
-      color: prodSize,
-      categoryId,
-      description,
-      shopBy,
-      price,
-      discPrice,
-      sizes,
-      images,
-      hoverImages,
+    if (!prodSize) {
+      return alert("select size first");
+    }
+
+    let filtData = cartData.filter((data) => {
+      if (description === data.description && title === data.title) return data;
     });
-    setTimeout(() => {
-      dispatch(getCartDetailsAction());
-    }, 200);
+    if (filtData.length === 0) {
+      axios.post(
+        "https://faballey-jsonserver-reactjs.herokuapp.com/cartsData",
+        {
+          title,
+          size: prodSize,
+          categoryId,
+          color,
+          description,
+          shopBy,
+          price,
+          discPrice,
+          sizes,
+          images,
+          hoverImages,
+        }
+      );
+      setTimeout(() => {
+        cartData.map((data) => {});
+        dispatch(getCartDetailsAction());
+      }, 200);
+    } else {
+      alert("already in cart");
+    }
+  };
+
+  const setProductSizeHandleClick = (e, id) => {
+    setProdSize(e);
+    setCheckActiveState({ ...productSizes, activeClass: id });
   };
 
   return (
@@ -96,14 +125,19 @@ const ProductDetails = () => {
             <p style={{ textDecoration: "underline" }}>SIZE GUIDE </p>
           </div>
           <div className="size">
-            <p onClick={(e) => setProdSize(e.target.innerText)}>XS</p>
-            <p onClick={(e) => setProdSize(e.target.innerText)}>S</p>
-            <p onClick={(e) => setProdSize(e.target.innerText)}>M</p>
-            <p onClick={(e) => setProdSize(e.target.innerText)}>L</p>
-            <p onClick={(e) => setProdSize(e.target.innerText)}>XL</p>
-            <p onClick={(e) => setProdSize(e.target.innerText)}>2XL</p>
-            <p onClick={(e) => setProdSize(e.target.innerText)}>3XL</p>
-            <p onClick={(e) => setProdSize(e.target.innerText)}>4XL</p>
+            {checkActiveState.sizeArray.map((size, index) => (
+              <p
+                className={
+                  index === checkActiveState.activeClass ? "activeSize" : ""
+                }
+                key={index}
+                onClick={(e) =>
+                  setProductSizeHandleClick(e.target.innerText, index)
+                }
+              >
+                {size}
+              </p>
+            ))}
           </div>
           <div className="cartBtns">
             <p className="addToCart" onClick={() => AddToCartBtnHandle()}>

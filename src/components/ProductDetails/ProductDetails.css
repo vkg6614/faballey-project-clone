@@ -20,9 +20,9 @@
   padding: 18px 0.8em;
   font-weight: bold;
 }
-.size p:hover {
-  color: white;
+.activeSize {
   background-color: black;
+  color: white;
 }
 
 .cartBtns {
