@@ -1,14 +1,40 @@
 import React, { useEffect } from "react";
 import "./Signup.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useRef } from "react";
+import axios from "axios";
+import { getUserLoginAction } from "../../../Redux/Actions/Actions";
+import { useDispatch } from "react-redux";
 
 const Signup = ({ signup_state }) => {
   const [crossClick, setCrossClick] = useState(signup_state ? false : true);
-  console.log(signup_state, "si", crossClick, "cro");
+  const userMail = useRef(null);
+  const dispatch = useDispatch();
+  const { userLogin } = useSelector((state) => state.getUserLoginReducer);
 
-  // useEffect(() => {
-  //   setCrossClick(signup_state ? true : false);
-  // }, [signup_state]);
+  const onSubmitOfUserMail = (e) => {
+    e.preventDefault();
+    let checkUserRegisteredorNot = userLogin.map((user) => {
+      if (user.email !== userMail.current.value) return userMail.current.value;
+    });
+
+    postUserData(checkUserRegisteredorNot[0]);
+  };
+
+  const postUserData = (data) => {
+    if (data) {
+      axios.post(
+        "https://faballey-jsonserver-reactjs.herokuapp.com/userLogin",
+        {
+          email: data,
+        }
+      );
+      setTimeout(() => {
+        dispatch(getUserLoginAction());
+      }, 1000);
+    }
+  };
 
   return (
     <div
@@ -29,9 +55,11 @@ const Signup = ({ signup_state }) => {
       <div className="signup-div">
         <h2 style={{ marginBottom: "30px" }}>LOGIN OR SIGNUP</h2>
         <p>* for a quicker checkout</p>
-        <input type="text" placeholder="Enter Mobile/Email" />
-        <br />
-        <button>CONTINUE</button>
+        <form action="" onSubmit={onSubmitOfUserMail}>
+          <input type="text" placeholder="Enter Mobile/Email" ref={userMail} />
+          <br />
+          <input type="submit" value="CONTINUE" />
+        </form>
         <div className="img-div">
           <p>Or continue with</p>
           <span>

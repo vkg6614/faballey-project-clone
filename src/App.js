@@ -2,6 +2,7 @@ import {
   getCartDetailsAction,
   getCategoriesAction,
   getProductsAction,
+  getUserLoginAction,
 } from "./Redux/Actions/Actions";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -25,6 +26,7 @@ function App() {
     dispatch(getProductsAction());
     dispatch(getCategoriesAction());
     dispatch(getCartDetailsAction());
+    dispatch(getUserLoginAction());
   }, [dispatch]);
   const getValueFromHome = (data) => {
     setType(data);

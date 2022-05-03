@@ -9,6 +9,9 @@ import {
   GET_CART_DETAILS_LOADING,
   GET_CART_DETAILS_SUCCESS,
   GET_CART_DETAILS_FAIL,
+  GET_USERLOGIN_DETAILS_LOADING,
+  GET_USERLOGIN_DETAILS_SUCCESS,
+  GET_USERLOGIN_DETAILS_FAIL,
 } from "../ActionTypes/ActionTypes";
 
 const getProductsAction = () => async (dispatch) => {
@@ -47,6 +50,23 @@ const getCartDetailsAction = () => async (dispatch) => {
   }
 };
 
-export { getProductsAction, getCategoriesAction, getCartDetailsAction };
+const getUserLoginAction = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_USERLOGIN_DETAILS_LOADING });
+    let { data } = await axios.get(
+      "https://faballey-jsonserver-reactjs.herokuapp.com/userLogin"
+    );
+    dispatch({ type: GET_USERLOGIN_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: GET_USERLOGIN_DETAILS_FAIL, payload: error });
+  }
+};
+
+export {
+  getProductsAction,
+  getCategoriesAction,
+  getCartDetailsAction,
+  getUserLoginAction,
+};
 
 // "https://faballey-jsonserver-reactjs.herokuapp.com/products";

@@ -6,12 +6,14 @@ import {
   getProductsReducer,
   getCategoriesReducer,
   getCartDetailsReducer,
+  getUserLoginReducer,
 } from "./Redux/Reducers/Reducers";
 
 const rootReducer = combineReducers({
   getProductsReducer,
   getCategoriesReducer,
   getCartDetailsReducer,
+  getUserLoginReducer,
 });
 
 const middleware = [thunk];

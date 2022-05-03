@@ -8,6 +8,9 @@ import {
   GET_CART_DETAILS_LOADING,
   GET_CART_DETAILS_SUCCESS,
   GET_CART_DETAILS_FAIL,
+  GET_USERLOGIN_DETAILS_LOADING,
+  GET_USERLOGIN_DETAILS_SUCCESS,
+  GET_USERLOGIN_DETAILS_FAIL,
 } from "../ActionTypes/ActionTypes";
 
 const getProductsReducer = (state = { productsData: [] }, action) => {
@@ -52,4 +55,23 @@ const getCartDetailsReducer = (state = { cartData: [] }, action) => {
   }
 };
 
-export { getProductsReducer, getCategoriesReducer, getCartDetailsReducer };
+const getUserLoginReducer = (state = { userLogin: [] }, action) => {
+  switch (action.type) {
+    case GET_USERLOGIN_DETAILS_LOADING:
+      return { loading: true, userLogin: [] };
+    case GET_USERLOGIN_DETAILS_SUCCESS:
+      return { loading: false, userLogin: action.payload };
+    case GET_USERLOGIN_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export {
+  getProductsReducer,
+  getCategoriesReducer,
+  getCartDetailsReducer,
+  getUserLoginReducer,
+};

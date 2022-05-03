@@ -73,7 +73,6 @@ const ProductDetails = () => {
         }
       );
       setTimeout(() => {
-        cartData.map((data) => {});
         dispatch(getCartDetailsAction());
       }, 200);
     } else {
