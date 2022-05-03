@@ -14,8 +14,8 @@ import CartDetails from "./components/CartDetails/CartDetails";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Shipping from "./components/ShippingPage/Shipping";
 import Payment from "./components/PaymentPage/Payment";
-import Signup from "./components/Sign/Log/Signup";
 import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
+import Signup from "./components/Signup/Signup";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,10 +39,10 @@ function App() {
 
   return (
     <>
-      <Signup signup_state={signup_state} />
+      {/* <SignIn /> */}
       <BrowserRouter>
         <Navbar getSignupStateFromSignup={getSignupStateFromSignup} />
-
+        <Signup signup_state={signup_state} />
         <Routes>
           <Route
             exact
@@ -52,7 +52,6 @@ function App() {
           <Route exact path="/lists" element={<Lists type={type} />} />
           <Route exact path="/Bag" element={<CartDetails />} />
 
-          {/* <Route exact path="/bag" element={<CartDetails />} /> */}
           <Route exact path="/Shipping" element={<Shipping />} />
           <Route exact path="/Payment" element={<Payment />} />
           <Route exact path="/:id" element={<ProductDetails />} />

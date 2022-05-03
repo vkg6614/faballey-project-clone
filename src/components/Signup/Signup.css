@@ -1,6 +1,5 @@
 .main-signup-div {
   position: fixed;
-  display: none;
   background-color: white;
   top: 50%;
   left: 50%;
@@ -33,7 +32,7 @@
   width: 35%;
   margin: 25px 0;
 }
-.signup-div button {
+.signupBtns {
   color: white;
   width: 100%;
   text-align: center;
@@ -47,4 +46,37 @@
   width: 100%;
   padding: 15px 1em;
   margin-top: 10px;
+}
+
+.create-new-password {
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  width: 35%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 20px 1em;
+}
+.create-new-password input {
+  width: 100%;
+  padding: 1em;
+}
+.verify-password {
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  width: 35%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 20px 1em;
+}
+.verify-password input {
+  width: 100%;
+  padding: 1em;
 }
