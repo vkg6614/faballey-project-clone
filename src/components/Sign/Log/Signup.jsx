@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Signup.css";
 import { useState } from "react";
 
 const Signup = ({ signup_state }) => {
-  const [crossClick, setCrossClick] = useState(true);
-  console.log(crossClick, "cro", signup_state, "si");
+  const [crossClick, setCrossClick] = useState(signup_state ? false : true);
+  console.log(signup_state, "si", crossClick, "cro");
+
+  // useEffect(() => {
+  //   setCrossClick(signup_state ? true : false);
+  // }, [signup_state]);
 
   return (
     <div
-      style={{ display: signup_state && crossClick ? "block" : "none" }}
+      style={{
+        display:
+          (signup_state && crossClick) ||
+          (signup_state === false && crossClick === false)
+            ? "block"
+            : "none",
+      }}
       className="main-signup-div"
     >
       <p>
-        <span onClick={() => setCrossClick(false)}>X</span>
+        <span onClick={() => setCrossClick(signup_state ? false : true)}>
+          X
+        </span>
       </p>
       <div className="signup-div">
         <h2 style={{ marginBottom: "30px" }}>LOGIN OR SIGNUP</h2>
@@ -35,7 +47,7 @@ const Signup = ({ signup_state }) => {
               alt="google"
             />
           </span>
-          <p>Skip</p>
+          <p onClick={() => setCrossClick(signup_state ? false : true)}>Skip</p>
         </div>
       </div>
     </div>

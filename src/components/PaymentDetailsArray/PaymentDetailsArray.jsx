@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const bankArray = [
   "Other Banks",
   "Bank of India",
@@ -37,6 +39,10 @@ const walletsArray = [
   "Phone Pe / BHIM UPI",
 ];
 
+// const payNowHandleClick = () => {
+
+// };
+
 export const divs_array = [
   {
     modeName: "CREDIT/DEBIT CARD",
@@ -50,7 +56,9 @@ export const divs_array = [
           <input type="text" placeholder="CVV" />
           <span>?</span>
         </div>
-        <button>PAY NOW</button>
+        <NavLink className="payNow" to="/successfull">
+          PAY NOW
+        </NavLink>
       </div>
     ),
   },
@@ -60,8 +68,12 @@ export const divs_array = [
       <div>
         <div className="upi">
           <input type="text" placeholder="VPA/UPI ID (eg. XXXXXXXXXX@upi)" />
-          <button>PAY NOW</button>
-          <button>PAY USING QR CODE</button>
+          <NavLink className="payNow" to="/successfull">
+            PAY NOW
+          </NavLink>
+          <NavLink className="payNow" to="/successfull">
+            PAY USING QR CODE
+          </NavLink>
         </div>
       </div>
     ),
@@ -87,7 +99,9 @@ export const divs_array = [
           <p style={{ fontSize: "0.8rem" }}>
             We will redirect you to your bank website to authorize the payment.
           </p>
-          <button>PAY NOW</button>
+          <NavLink className="payNow" to="/successfull">
+            PAY NOW
+          </NavLink>
         </div>
       </div>
     ),
@@ -111,7 +125,9 @@ export const divs_array = [
           <p style={{ fontSize: "0.8rem" }}>
             We will redirect you to your bank website to authorize the payment.
           </p>
-          <button>PAY NOW</button>
+          <NavLink className="payNow" to="/successfull">
+            PAY NOW
+          </NavLink>
         </div>
       </div>
     ),
@@ -120,7 +136,9 @@ export const divs_array = [
     modeName: "CASH ON DELIVERY",
     mode: (
       <div className="cashOnDelivery">
-        <button>PAY BY CASH</button>
+        <NavLink className="payNow" to="/successfull">
+          PAY CASH ON DELIVERY
+        </NavLink>
       </div>
     ),
   },

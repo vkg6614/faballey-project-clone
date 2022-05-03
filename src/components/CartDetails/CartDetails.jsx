@@ -14,14 +14,15 @@ const CartDetails = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  var [priceOfCart, setPriceOfcart] = useState(null);
+
   useEffect(() => {
     dispatch(getCartDetailsAction());
   }, [dispatch]);
 
   useEffect(() => {
     getPriceFromCart();
-  }, [priceOfCart]);
-  var [priceOfCart, setPriceOfcart] = useState(null);
+  }, [priceOfCart, dispatch, cartData]);
 
   const getPriceFromCart = () => {
     let price = cartData.map((data) => {

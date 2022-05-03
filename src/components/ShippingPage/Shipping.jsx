@@ -17,6 +17,10 @@ const Shipping = () => {
   // console.log(cartData, "car");
   var [priceOfCart, setPriceOfcart] = useState(null);
 
+  useEffect(() => {
+    getPriceFromCart();
+  }, [cartData]);
+
   const [formValue, setFormValue] = React.useState({
     name: "",
     mobile: "",
@@ -69,10 +73,6 @@ const Shipping = () => {
     let sum = price.reduce((acc, curr) => (acc += curr), 0);
     setPriceOfcart(sum);
   };
-
-  useEffect(() => {
-    getPriceFromCart();
-  }, []);
 
   return (
     <div>

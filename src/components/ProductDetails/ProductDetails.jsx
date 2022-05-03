@@ -23,7 +23,7 @@ const ProductDetails = () => {
 
   useState(() => {
     getSingleProduct();
-  }, [proData]);
+  }, [proData, cartData]);
 
   function getSingleProduct() {
     let singleData =

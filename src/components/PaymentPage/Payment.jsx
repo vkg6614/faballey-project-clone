@@ -19,6 +19,10 @@ const Payment = () => {
   });
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
 
+  useEffect(() => {
+    getPriceFromCart();
+  }, [cartData]);
+
   const getPriceFromCart = () => {
     let price = cartData.map((data) => {
       return data.price;
@@ -26,10 +30,6 @@ const Payment = () => {
     let sum = price.reduce((acc, curr) => (acc += curr), 0);
     setPriceOfcart(sum);
   };
-
-  useEffect(() => {
-    getPriceFromCart();
-  }, []);
 
   return (
     <div>

@@ -14,10 +14,11 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Shipping from "./components/ShippingPage/Shipping";
 import Payment from "./components/PaymentPage/Payment";
 import Signup from "./components/Sign/Log/Signup";
+import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
 
 function App() {
   const dispatch = useDispatch();
-  const [type, setType] = useState("");
+  const [type, setType] = useState();
   const [signup_state, setSignup_state] = useState(false);
 
   useEffect(() => {
@@ -53,6 +54,8 @@ function App() {
           <Route exact path="/Shipping" element={<Shipping />} />
           <Route exact path="/Payment" element={<Payment />} />
           <Route exact path="/:id" element={<ProductDetails />} />
+
+          <Route exact path="/successfull" element={<PaymentSuccess />} />
         </Routes>
       </BrowserRouter>
     </>
