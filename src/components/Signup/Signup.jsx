@@ -68,10 +68,13 @@ const Signup = ({ signup_state }) => {
     });
 
     if (checkUserRegisteredorNot.length === 0) {
-      axios.post("https://faballey-jsonserver-reactjs.herokuapp.com/users", {
-        email: userMail.current.value,
-        password: userPassword.current.value,
-      });
+      axios.post(
+        "https://faballey-jsonserver-reactjs.herokuapp.com/userLogin",
+        {
+          email: userMail.current.value,
+          password: userPassword.current.value,
+        }
+      );
       setTimeout(() => {
         dispatch(getUserLoginAction());
       }, 800);
