@@ -7,7 +7,7 @@ URL_Link: [www.faballey.com](https://faballey-project-clone.vercel.app/)
 
 deployment: https://faballey-project-clone.vercel.app/
 
-## About Joybuy:
+## About Faballey:
 Faballey is an E-Commerce website where any individuals can purchase different ladies' categories products.
 It is an interactive website where users feel free to go through it.
 
