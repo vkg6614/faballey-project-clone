@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./ProductDetails.css";
@@ -14,25 +14,22 @@ var productSizes = {
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [proData, setProData] = useState();
-  const [prodSize, setProdSize] = useState("");
+
   const { productsData } = useSelector((state) => state.getProductsReducer);
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+  const [proData, setProData] = useState([]);
+  const [prodSize, setProdSize] = useState([]);
   const [checkActiveState, setCheckActiveState] = useState(productSizes);
   const dispatch = useDispatch();
 
-  useState(() => {
-    getSingleProduct();
-  }, [proData, cartData]);
-
-  function getSingleProduct() {
-    let singleData =
-      productsData &&
-      productsData.filter((data) => {
+  useEffect(() => {
+    setTimeout(() => {
+      let singleData = productsData.filter((data) => {
         return data.id === +id;
       });
-    setProData(singleData);
-  }
+      setProData(singleData);
+    }, 200);
+  }, [proData, cartData, id, productsData]);
 
   const AddToCartBtnHandle = () => {
     let {
@@ -97,17 +94,17 @@ const ProductDetails = () => {
           }}
         >
           <img
-            src={proData && proData[0].images}
-            alt={proData && proData[0].title}
+            src={proData.length > 0 ? proData[0].images : "undefined"}
+            alt={proData.length > 0 ? proData[0].title : "undefined"}
           />
           <img
-            src={proData && proData[0].hoverImages}
-            alt={proData && proData[0].title}
+            src={proData.length > 0 ? proData[0].hoverImages : "undefined"}
+            alt={proData.length > 0 ? proData[0].title : "undefined"}
           />
         </div>
         <div style={{ width: "36%" }}>
-          <h3>{proData && proData[0].description}</h3>
-          <h3>₹ {proData && proData[0].price}</h3>
+          <h3>{proData.length > 0 && proData[0].description}</h3>
+          <h3>₹ {proData.length > 0 && proData[0].price}</h3>
           <p style={{ color: "green" }}>Inclusive of all taxes</p>
           <p
             style={{

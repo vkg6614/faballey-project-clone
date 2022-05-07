@@ -9,17 +9,15 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Signup = ({ signup_state }) => {
-  console.log(signup_state, "sign_staee");
+  // console.log(signup_state, "sign_staee");
   const [signupState, setSignupState] = useState(false);
 
   const [mainLoginStyle, setMainLoginStyle] = useState({ display: "none" });
-  console.log(mainLoginStyle, "main");
+  // console.log(mainLoginStyle, "main");
   useEffect(() => {
     setSignupState(signup_state ? true : false);
     setMainLoginStyle(signupState ? { display: "block" } : { display: "none" });
   }, [signup_state, signupState]);
-
-  // const [crossClick, setCrossClick] = useState(false);
 
   const [myStyle, setMyStyle] = useState({ display: "none" });
   const [verifyPassword, setVerifyPassword] = useState({ display: "none" });
@@ -99,7 +97,13 @@ const Signup = ({ signup_state }) => {
     <div>
       <div style={mainLoginStyle} className="main-signup-div">
         <p>
-          <span onClick={() => setMainLoginStyle({ display: "none" })}>X</span>
+          <span
+            onClick={() => {
+              setMainLoginStyle({ display: "none" });
+            }}
+          >
+            X
+          </span>
         </p>
         <div className="signup-div">
           <h2 style={{ marginBottom: "30px" }}>LOGIN OR SIGNUP</h2>

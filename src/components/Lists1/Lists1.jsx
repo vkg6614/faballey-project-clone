@@ -2,11 +2,11 @@ import React from "react";
 import "./Lists1.css";
 import { useNavigate } from "react-router-dom";
 
-const Lists1 = ({ getTypeValue }) => {
+const Lists1 = () => {
   const navigate = useNavigate();
 
   const onLists1ClickChange = (type) => {
-    getTypeValue(type);
+    sessionStorage.setItem("type", JSON.stringify(type));
     navigate("/lists");
   };
 

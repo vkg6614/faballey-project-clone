@@ -11,31 +11,37 @@ const prodsList = [
   "LOUNGEWEAR",
 ];
 
-const Lists = ({ type }) => {
+const Lists = () => {
   const { productsData } = useSelector((state) => state.getProductsReducer);
   const { categoriesData } = useSelector((state) => state.getCategoriesReducer);
+  // console.log(productsData, categoriesData);
+
+  const [list1Type, setList1Type] = useState(
+    JSON.parse(sessionStorage.getItem("type"))
+  );
   const [updateProduct, setUpdateProduct] = useState("");
   const [updateCategory, setUpdateCategory] = useState("");
 
   useEffect(() => {
-    getUpdatedCategories();
-  }, [type]);
+    setTimeout(() => {
+      let tempCate =
+        productsData &&
+        categoriesData &&
+        categoriesData.filter((cate_data) => {
+          return cate_data.cat_title === list1Type;
+        });
 
-  function getUpdatedCategories() {
-    let tempCate =
-      categoriesData &&
-      categoriesData.filter((cate_data) => {
-        return cate_data.cat_title === type;
-      });
-    let tempPro =
-      tempCate &&
-      productsData &&
-      productsData.filter((pro_data) => {
-        return pro_data.categoryId === tempCate[0].id;
-      });
-    setUpdateProduct(tempPro);
-    setUpdateCategory(tempCate);
-  }
+      let tempPro =
+        categoriesData &&
+        productsData &&
+        productsData.filter((pro_data) => {
+          return pro_data.categoryId === tempCate[0].id;
+        });
+
+      setUpdateProduct(tempPro);
+      setUpdateCategory(tempCate);
+    }, 500);
+  }, [productsData, categoriesData, list1Type]);
 
   const prod_listHandleClick = (list) => {
     let tempPro =
@@ -62,7 +68,9 @@ const Lists = ({ type }) => {
           <>
             <div className="left-list-container">
               <div>
-                <h2>{updateCategory && updateCategory[0].cat_title}</h2>
+                <h2>
+                  {updateCategory.length > 0 && updateCategory[0].cat_title}
+                </h2>
                 <p
                   style={{
                     color: "rgb(252,100,134)",
@@ -70,7 +78,7 @@ const Lists = ({ type }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  {updateCategory && updateCategory[0].cat_title}
+                  {updateCategory.length > 0 && updateCategory[0].cat_title}
                 </p>
               </div>
               <div>
@@ -127,7 +135,7 @@ const Lists = ({ type }) => {
             </datalist>
             <datalist id="discList">
               <option></option>
-              <option>{type}</option>
+              <option></option>
               <option>50</option>
               <option>70</option>
             </datalist>
