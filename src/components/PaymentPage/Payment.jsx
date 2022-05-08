@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 import ResponsiveAppBar from "../CartNavbar/CartNavbar";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import "./Payment.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserAddressAction } from "../../Redux/Actions/Actions";
 
 const paymentMode = [
   "CREDIT/DEBIT CARD",
@@ -17,7 +18,11 @@ const Payment = () => {
   const [checkActiveState, setCheckActiveState] = useState({
     state: "CREDIT/DEBIT CARD",
   });
+  const dispatch = useDispatch();
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+  useEffect(() => {
+    dispatch(getUserAddressAction());
+  }, [dispatch]);
 
   useEffect(() => {
     getPriceFromCart();

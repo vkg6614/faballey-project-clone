@@ -2,18 +2,24 @@ import React, { useState, useEffect } from "react";
 import ResponsiveAppBar from "../CartNavbar/CartNavbar";
 import "./Shipping.css";
 import Box from "@mui/material/Box";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAddressAction } from "../../Redux/Actions/Actions";
 
 const Shipping = () => {
+  const dispatch = useDispatch();
   const [checkFields, setCheckFields] = useState(false);
 
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+  const { userAddress } = useSelector((state) => state.getUserAddressReducer);
+  console.log(userAddress);
+
   // console.log(cartData, "car");
   var [priceOfCart, setPriceOfcart] = useState(null);
 
@@ -49,8 +55,7 @@ const Shipping = () => {
       formValue.country !== "" &&
       formValue.pincode !== "" &&
       formValue.city !== "" &&
-      formValue.state !== "" &&
-      formValue.checked !== false
+      formValue.state !== ""
     ) {
       setCheckFields(true);
 
@@ -59,7 +64,11 @@ const Shipping = () => {
         formValue
       );
 
-      navigate("/Payment");
+      dispatch(getUserAddressAction());
+
+      setTimeout(() => {
+        navigate("/Payment");
+      }, 300);
     } else {
       setCheckFields(false);
       alert("one of field is missing");
@@ -77,10 +86,32 @@ const Shipping = () => {
   return (
     <div>
       <ResponsiveAppBar />
+
       <div className="cartDetails-main-container">
         <div className="cartDetails-secondary-container">
           <div className="cartDetails-left-container">
             <h3>Where do you want us to Deliver?</h3>
+            <div className="user-address">
+              {userAddress &&
+                userAddress.map((address) => (
+                  <div
+                    key={address.id}
+                    style={{ border: "1px solid grey", padding: "16px 1em" }}
+                  >
+                    <div className="name-icon">
+                      <p>{address.name}</p>
+                      <DeleteRoundedIcon />
+                    </div>
+                    <p>{address.area}</p>
+                    <span>{address.city}</span>
+                    <span>{address.state}</span>
+                    <br />
+                    <span>{address.country}</span>
+                    <span>{address.pincode}</span>
+                    <p>Mobile {address.mobile}</p>
+                  </div>
+                ))}
+            </div>
             <div className="shipping-div">
               <Box className="box">
                 <FormControl className="formControl" variant="standard">
@@ -99,7 +130,7 @@ const Shipping = () => {
                   </FormHelperText>
                 </FormControl>
                 <FormControl className="formControl" variant="standard">
-                  {/* <InputLabel htmlFor="component-helper">Name</InputLabel> */}
+                  {/* <InputLabel htmlfor="component-helper">Name</InputLabel> */}
                   <label>Mobile number*</label>
                   <Input
                     type="phone"

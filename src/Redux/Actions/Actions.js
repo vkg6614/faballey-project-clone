@@ -12,6 +12,9 @@ import {
   GET_USERLOGIN_DETAILS_LOADING,
   GET_USERLOGIN_DETAILS_SUCCESS,
   GET_USERLOGIN_DETAILS_FAIL,
+  GET_USER_ADDRESS_LOADING,
+  GET_USER_ADDRESS_SUCCESS,
+  GET_USER_ADDRESS_FAIL,
 } from "../ActionTypes/ActionTypes";
 
 const getProductsAction = () => async (dispatch) => {
@@ -62,9 +65,22 @@ const getUserLoginAction = () => async (dispatch) => {
   }
 };
 
+const getUserAddressAction = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_USER_ADDRESS_LOADING });
+    let { data } = await axios.get(
+      "https://faballey-jsonserver-reactjs.herokuapp.com/userAddress"
+    );
+    dispatch({ type: GET_USER_ADDRESS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: GET_USER_ADDRESS_FAIL, payload: error });
+  }
+};
+
 export {
   getProductsAction,
   getCategoriesAction,
+  getUserAddressAction,
   getCartDetailsAction,
   getUserLoginAction,
 };

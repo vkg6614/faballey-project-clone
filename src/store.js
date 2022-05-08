@@ -7,6 +7,7 @@ import {
   getCategoriesReducer,
   getCartDetailsReducer,
   getUserLoginReducer,
+  getUserAddressReducer,
 } from "./Redux/Reducers/Reducers";
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   getCategoriesReducer,
   getCartDetailsReducer,
   getUserLoginReducer,
+  getUserAddressReducer,
 });
 
 const middleware = [thunk];

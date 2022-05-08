@@ -25,3 +25,15 @@
   font-weight: normal;
   text-transform: capitalize;
 }
+
+.user-address {
+  display: grid;
+  font-size: 0.8em;
+  gap: 1em;
+  margin-top: 20px;
+  grid-template-columns: auto auto;
+}
+.user-address .name-icon {
+  display: flex;
+  justify-content: space-between;
+}

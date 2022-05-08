@@ -2,6 +2,7 @@ import {
   getCartDetailsAction,
   getCategoriesAction,
   getProductsAction,
+  getUserAddressAction,
   getUserLoginAction,
 } from "./Redux/Actions/Actions";
 import { useDispatch } from "react-redux";
@@ -26,6 +27,7 @@ function App() {
     dispatch(getCategoriesAction());
     dispatch(getCartDetailsAction());
     dispatch(getUserLoginAction());
+    dispatch(getUserAddressAction());
   }, [dispatch]);
 
   const getSignupStateFromSignup = (data) => {

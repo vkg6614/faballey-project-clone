@@ -11,6 +11,9 @@ import {
   GET_USERLOGIN_DETAILS_LOADING,
   GET_USERLOGIN_DETAILS_SUCCESS,
   GET_USERLOGIN_DETAILS_FAIL,
+  GET_USER_ADDRESS_LOADING,
+  GET_USER_ADDRESS_SUCCESS,
+  GET_USER_ADDRESS_FAIL,
 } from "../ActionTypes/ActionTypes";
 
 const getProductsReducer = (state = { productsData: [] }, action) => {
@@ -69,9 +72,24 @@ const getUserLoginReducer = (state = { userLogin: [] }, action) => {
   }
 };
 
+const getUserAddressReducer = (state = { userAddress: [] }, action) => {
+  switch (action.type) {
+    case GET_USER_ADDRESS_LOADING:
+      return { loading: true, userAddress: [] };
+    case GET_USER_ADDRESS_SUCCESS:
+      return { loading: false, userAddress: action.payload };
+    case GET_USER_ADDRESS_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
 export {
   getProductsReducer,
   getCategoriesReducer,
   getCartDetailsReducer,
   getUserLoginReducer,
+  getUserAddressReducer,
 };
