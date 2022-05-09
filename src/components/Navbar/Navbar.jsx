@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import "./Navbar.css";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
@@ -19,13 +19,45 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const Navbar = ({ getSignupStateFromSignup }) => {
+  const getEmailFromLocatStorage = () => {
+    const data = localStorage.getItem("userEmail");
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return null;
+    }
+  };
+
+  const [emailFirstLetter, setEmailFirstLetter] = useState(
+    getEmailFromLocatStorage()
+  );
+
+  console.log(emailFirstLetter, "eamila");
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+
+  // useEffect(() => {
+  //   getEmailFromLocatStorage();
+  // }, [emailFirstLetter]);
+
+  // const { userLogin } = useSelector((state) => state.getUserLoginReducer);
+  // const navigate = useNavigate();
+
   const [cartLength, setCartLength] = useState("");
   const [handleSignup, setHandleSignup] = useState(false);
+
+  // const [signupStyle, setSignupStyle] = useState({ display: "block" });
+
   useEffect(() => {
     setCartLength(cartData);
     getSignupStateFromSignup(handleSignup);
   }, [cartLength, cartData, getSignupStateFromSignup, handleSignup]);
+
+  console.log(emailFirstLetter, "em");
+
+  // const [loginHandleStyle, setLoginHandleStyle] = useState({ display: "none" });
+
+  // console.log(emailFirstLetter);
+
   const location = useLocation();
   if (
     location.pathname === "/cartDetails" ||
@@ -35,6 +67,7 @@ const Navbar = ({ getSignupStateFromSignup }) => {
   ) {
     return null;
   }
+
   return (
     <div>
       <div className="container">
@@ -66,19 +99,33 @@ const Navbar = ({ getSignupStateFromSignup }) => {
             <Grid item>
               <Button>Gift Cards</Button>
             </Grid>
-            <Grid item>
-              <Button onClick={() => setHandleSignup(!handleSignup)}>
-                Login
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={() => setHandleSignup(!handleSignup)}
-                className="signup"
-              >
-                Sign up
-              </Button>
-            </Grid>
+
+            {emailFirstLetter === null ? (
+              <Grid item>
+                <Grid container>
+                  <Grid item>
+                    <Button onClick={() => setHandleSignup(!handleSignup)}>
+                      Login
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      onClick={() => setHandleSignup(!handleSignup)}
+                      className="signup"
+                    >
+                      Sign up
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
+            ) : (
+              <Grid item>
+                <p className="emailFirst">
+                  {emailFirstLetter && emailFirstLetter.email[0].toUpperCase()}
+                </p>
+              </Grid>
+            )}
+
             <Grid item>
               <NavLink to="/Bag">
                 <IconButton className="AddToCartBtn" aria-label="cart">

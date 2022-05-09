@@ -5,6 +5,7 @@ import PaymentDetails from "../PaymentDetails/PaymentDetails";
 import "./Payment.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserAddressAction } from "../../Redux/Actions/Actions";
+import EstimatedTIme from "../EstimatedTime/EstimatedTIme";
 
 const paymentMode = [
   "CREDIT/DEBIT CARD",
@@ -19,9 +20,14 @@ const Payment = () => {
     state: "CREDIT/DEBIT CARD",
   });
   const dispatch = useDispatch();
+  const [deliverAddressState, setDeliveredAddressState] = useState([]);
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
+
   useEffect(() => {
     dispatch(getUserAddressAction());
+    setDeliveredAddressState(
+      JSON.parse(sessionStorage.getItem("deliveredAddress"))
+    );
   }, [dispatch]);
 
   useEffect(() => {
@@ -65,7 +71,7 @@ const Payment = () => {
             />
           </div>
           <div className="price-address-div">
-            <h3>{cartData.length} Product(s) in bag</h3>
+            <h3>{cartData && cartData.length} Product(s) in bag</h3>
             <div
               style={{
                 backgroundColor: "rgb(244,244,244)",
@@ -112,24 +118,31 @@ const Payment = () => {
               <NavLink to="/Shipping">Change Address</NavLink>
             </div>
             <div
+              key={deliverAddressState[0] && deliverAddressState[0].id}
               style={{
                 border: "1px solid grey",
                 padding: "16px 1em",
               }}
             >
+              <p>{deliverAddressState[0] && deliverAddressState[0].name}</p>
+              <p>{deliverAddressState[0] && deliverAddressState[0].area}</p>
+              <span>
+                {deliverAddressState[0] && deliverAddressState[0].city},
+              </span>
+              <span>
+                {deliverAddressState[0] && deliverAddressState[0].state},
+              </span>
+              <span>
+                {deliverAddressState[0] && deliverAddressState[0].country} -
+              </span>
+              <span>
+                {deliverAddressState[0] && deliverAddressState[0].pincode}
+              </span>
               <p>
-                VIKAS X <br />
-                H. No- 542/1 Vikas nagar Nangal kheri,
-                <br />
-                Panipat, Haryana India - 132103 <br />
-                Mobile 8950950225
+                Mobile {deliverAddressState[0] && deliverAddressState[0].mobile}
               </p>
             </div>
-            <div style={{ marginTop: "18px" }} className="bottom-div">
-              <p style={{ marginBottom: "18px" }}>Estimated Delivery Time</p>
-              <p>India : 4-6 business days.</p>
-              <p>International: 7-12 business days.</p>
-            </div>
+            <EstimatedTIme />
           </div>
         </div>
       </div>

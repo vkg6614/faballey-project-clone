@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartDetailsAction } from "../../Redux/Actions/Actions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import EstimatedTIme from "../EstimatedTime/EstimatedTIme";
 
 const CartDetails = () => {
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
@@ -130,11 +131,7 @@ const CartDetails = () => {
                 </button>
               </div>
 
-              <div className="bottom-div">
-                <p style={{ marginBottom: "18px" }}>Estimated Delivery Time</p>
-                <p>India : 4-6 business days.</p>
-                <p>International: 7-12 business days.</p>
-              </div>
+              <EstimatedTIme />
             </div>
           </div>
         </div>

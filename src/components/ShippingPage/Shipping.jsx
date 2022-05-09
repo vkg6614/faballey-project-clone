@@ -11,21 +11,32 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserAddressAction } from "../../Redux/Actions/Actions";
+import EstimatedTIme from "../EstimatedTime/EstimatedTIme";
 
 const Shipping = () => {
   const dispatch = useDispatch();
   const [checkFields, setCheckFields] = useState(false);
+  const [signupDiv, setSignupDiv] = useState({ display: "block" });
+  const [addNewAddressBtnStyle, setAddNewAddressBtnStyle] = useState({
+    display: "none",
+  });
 
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
   const { userAddress } = useSelector((state) => state.getUserAddressReducer);
-  console.log(userAddress);
 
-  // console.log(cartData, "car");
   var [priceOfCart, setPriceOfcart] = useState(null);
 
   useEffect(() => {
+    if (userAddress.length !== 0) {
+      setSignupDiv({ display: "none" });
+      setAddNewAddressBtnStyle({ display: "block" });
+    } else {
+      setAddNewAddressBtnStyle({ display: "none" });
+      setSignupDiv({ display: "block" });
+    }
+
     getPriceFromCart();
-  }, [cartData]);
+  }, [cartData, userAddress]);
 
   const [formValue, setFormValue] = React.useState({
     name: "",
@@ -83,6 +94,21 @@ const Shipping = () => {
     setPriceOfcart(sum);
   };
 
+  const addressDeleteHandleClick = async (id) => {
+    await axios.delete(
+      `https://faballey-jsonserver-reactjs.herokuapp.com/userAddress/${id}`
+    );
+    dispatch(getUserAddressAction());
+  };
+
+  const deliveredAddressBtn = (id) => {
+    let tempAddress = userAddress.filter((add) => {
+      return add.id === id;
+    });
+    sessionStorage.setItem("deliveredAddress", JSON.stringify(tempAddress));
+    navigate("/Payment");
+  };
+
   return (
     <div>
       <ResponsiveAppBar />
@@ -93,26 +119,56 @@ const Shipping = () => {
             <h3>Where do you want us to Deliver?</h3>
             <div className="user-address">
               {userAddress &&
-                userAddress.map((address) => (
-                  <div
-                    key={address.id}
-                    style={{ border: "1px solid grey", padding: "16px 1em" }}
-                  >
-                    <div className="name-icon">
-                      <p>{address.name}</p>
-                      <DeleteRoundedIcon />
+                userAddress.map(
+                  ({
+                    id,
+                    name,
+                    area,
+                    city,
+                    state,
+                    country,
+                    pincode,
+                    mobile,
+                  }) => (
+                    <div
+                      key={id}
+                      style={{ border: "1px solid grey", padding: "16px 1em" }}
+                    >
+                      <div className="name-icon">
+                        <p>{name}</p>
+                        <DeleteRoundedIcon
+                          onClick={() => addressDeleteHandleClick(id)}
+                        />
+                      </div>
+                      <p>{area}</p>
+                      <span>{city}</span>
+                      <span>{state}</span>
+                      <br />
+                      <span>{country}</span>
+                      <span>{pincode}</span>
+                      <p>Mobile {mobile}</p>
+                      <button
+                        onClick={() => deliveredAddressBtn(id)}
+                        className="address-btn"
+                      >
+                        Deliver to this Address
+                      </button>
                     </div>
-                    <p>{address.area}</p>
-                    <span>{address.city}</span>
-                    <span>{address.state}</span>
-                    <br />
-                    <span>{address.country}</span>
-                    <span>{address.pincode}</span>
-                    <p>Mobile {address.mobile}</p>
-                  </div>
-                ))}
+                  )
+                )}
             </div>
-            <div className="shipping-div">
+
+            <div>
+              <button
+                onClick={() => setSignupDiv({ display: "block" })}
+                style={addNewAddressBtnStyle}
+                className="addNewAddress"
+              >
+                Add New Address
+              </button>
+            </div>
+
+            <div style={signupDiv} className="shipping-div">
               <Box className="box">
                 <FormControl className="formControl" variant="standard">
                   <label>Full name*</label>
@@ -273,11 +329,7 @@ const Shipping = () => {
                 </div>
               </div>
 
-              <div className="bottom-div">
-                <p style={{ marginBottom: "18px" }}>Estimated Delivery Time</p>
-                <p>India : 4-6 business days.</p>
-                <p>International: 7-12 business days.</p>
-              </div>
+              <EstimatedTIme />
             </div>
           </div>
         </div>

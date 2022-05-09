@@ -37,3 +37,20 @@
   display: flex;
   justify-content: space-between;
 }
+.user-address .address-btn {
+  width: 100%;
+  padding: 10px 0;
+  background-color: rgb(252, 100, 134);
+  color: white;
+  border: none;
+  margin-top: 10px;
+}
+
+.addNewAddress {
+  width: 100%;
+  padding: 10px 0;
+  background-color: white;
+  color: rgb(252, 100, 134);
+  margin: 10px 0;
+  border: 1px solid grey;
+}

@@ -59,8 +59,6 @@ const Signup = ({ signup_state }) => {
   };
 
   const handleSignUpBtnClick = () => {
-    console.log(userPassword.current.value);
-
     let checkUserRegisteredorNot = userLogin.filter((user) => {
       return user.email === userMail.current.value;
     });
@@ -73,6 +71,12 @@ const Signup = ({ signup_state }) => {
           password: userPassword.current.value,
         }
       );
+
+      localStorage.setItem(
+        "userEmail",
+        JSON.stringify({ email: userMail.current.value })
+      );
+
       setTimeout(() => {
         dispatch(getUserLoginAction());
       }, 800);
@@ -84,12 +88,24 @@ const Signup = ({ signup_state }) => {
 
   const handleSignInBtnClick = () => {
     let checkUserVerifyOrNot = userLogin.filter((user) => {
-      return user.password === userPasswordVerify.current.value;
+      return (
+        user.password === userPasswordVerify.current.value &&
+        user.email === userMail.current.value
+      );
     });
     if (checkUserVerifyOrNot.length > 0) {
+      localStorage.setItem(
+        "userEmail",
+        JSON.stringify({ email: userMail.current.value })
+      );
+
       setVerifyPassword({ display: "none" });
       alert("login Process done");
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 200);
+    } else {
+      alert("your email or password is wrong");
     }
   };
 
