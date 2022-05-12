@@ -19,8 +19,16 @@ const SingleCart = ({ currElem }) => {
           <br />
           OFF
         </p>
-        <img className="image" src={currElem.images} alt={currElem.title} />
         <img
+          width="100%"
+          height="320px"
+          className="image"
+          src={currElem.images}
+          alt={currElem.title}
+        />
+        <img
+          width="100%"
+          height="320px"
           className="hover-image"
           src={currElem.hoverImages}
           alt={currElem.title}

@@ -76,6 +76,7 @@ const getUserAddressReducer = (state = { userAddress: [] }, action) => {
   switch (action.type) {
     case GET_USER_ADDRESS_LOADING:
       return { loading: true, userAddress: [] };
+
     case GET_USER_ADDRESS_SUCCESS:
       return { loading: false, userAddress: action.payload };
     case GET_USER_ADDRESS_FAIL:

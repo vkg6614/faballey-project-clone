@@ -18,21 +18,16 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
+const getEmailFromLocatStorage = () => {
+  const data = localStorage.getItem("userEmail");
+  if (data) {
+    return JSON.parse(data);
+  } else {
+    return null;
+  }
+};
+
 const Navbar = ({ getSignupStateFromSignup }) => {
-  const getEmailFromLocatStorage = () => {
-    const data = localStorage.getItem("userEmail");
-    if (data) {
-      return JSON.parse(data);
-    } else {
-      return null;
-    }
-  };
-
-  const [emailFirstLetter, setEmailFirstLetter] = useState(
-    getEmailFromLocatStorage()
-  );
-
-  console.log(emailFirstLetter, "eamila");
   const { cartData } = useSelector((state) => state.getCartDetailsReducer);
 
   // useEffect(() => {
@@ -51,6 +46,12 @@ const Navbar = ({ getSignupStateFromSignup }) => {
     setCartLength(cartData);
     getSignupStateFromSignup(handleSignup);
   }, [cartLength, cartData, getSignupStateFromSignup, handleSignup]);
+
+  const [emailFirstLetter, setEmailFirstLetter] = useState(
+    getEmailFromLocatStorage()
+  );
+
+  console.log(emailFirstLetter, "eamila");
 
   console.log(emailFirstLetter, "em");
 
